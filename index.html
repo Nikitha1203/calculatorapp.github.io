@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    /* CSS Styling */
+    body {
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      background: url('moving.gif') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .calculator-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      text-align: center; /* Align the calculator content to the center */
+    }
+
+    .display {
+      margin-bottom: 25px;
+      background: #eee;
+      padding: 8px;
+      text-align: right;
+      font-size: 30px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+      width: 100%;
+    }
+
+    .buttons button {
+      height: 50px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      background: #888;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    .buttons button:hover {
+      background: #555;
+    }
+
+    .buttons .operator {
+      background: #ff8c00;
+    }
+
+    .buttons .operator:hover {
+      background: #ff6100;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-container">
+    <div class="calculator">
+      <div class="display" id="display">0</div>
+      <div class="buttons">
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="appendOperator('/')">/</button>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="appendOperator('*')">*</button>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="appendOperator('-')">-</button>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="appendNumber('.')">.</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendOperator('+')">+</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript Logic
+    let display = document.getElementById('display');
+    let expression = '';
+
+    function clearDisplay() {
+      display.textContent = '0';
+      expression = '';
+    }
+
+    function appendNumber(number) {
+      if (display.textContent === '0') {
+        display.textContent = '';
+      }
+      display.textContent += number;
+      expression += number;
+    }
+
+    function appendOperator(operator) {
+      if (display.textContent !== '0') {
+        display.textContent += operator;
+        expression += operator;
+      }
+    }
+
+    function calculate() {
+      let result;
+      try {
+        result = eval(expression);
+        display.textContent = result;
+        expression = '';
+      } catch (error) {
+        display.textContent = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
